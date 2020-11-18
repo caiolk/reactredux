@@ -2,22 +2,26 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-const Video =  (activeModule:any,activeLesson:any) => {
-   console.log('activeModule',activeModule)
-//    console.log('\n')
-    console.log('activeLesson',activeLesson)
-//    console.log('\n')
+interface activeModuleParam{
+    id:number,
+    lessons: [
+        id:number,
+        title:string
+    ],
+    title: string
+}
+const Video =  ({activeModule,activeLesson}:any) => {
+    console.log(activeModule,activeLesson)
     return (
 
         <div style={{padding:10}}>
-            <strong> Módulo </strong>
-            <span>- Aula </span>
+            <strong> Módulo { activeModule.title }</strong>
+            <span>- Aula { activeLesson.title }</span>
         </div>
     );
 
 }
 
-export default connect( (state:any) => ({
-    activeModule: state.activeModule,
-    activeLesson: state.activeLesson
- }))(Video)
+export default connect((state:any) => 
+    ( {activeModule :state.activeModule, activeLesson: state.activeLesson}))
+    (Video)
